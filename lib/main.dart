@@ -8,7 +8,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:oktoast/oktoast.dart';
 import 'core/features/theme/app_theme.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 
 void main() async{
 

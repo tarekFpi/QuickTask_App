@@ -199,6 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           date: task['startDate'],
                           status: task['status'],
                           statusColor: task['status'] == "incomplete" ? Colors.purple : Colors.grey,
+                          task: task,
                           onToggle: () {
                             final newStatus = task['status'] == 'incomplete' ? 'complete' : 'incomplete';
                             taskController.updateTaskStatus(task['id'], newStatus);
@@ -256,6 +257,7 @@ class TaskCard extends StatelessWidget {
   final String date;
   final String status;
   final Color statusColor;
+  final Map<String, dynamic> task;
   final VoidCallback onToggle;
 
   const TaskCard({
@@ -266,6 +268,7 @@ class TaskCard extends StatelessWidget {
     required this.date,
     required this.status,
     required this.statusColor,
+    required this.task,
     required this.onToggle,
   });
 
@@ -363,20 +366,18 @@ class TaskCard extends StatelessWidget {
               ),
 
               /// 🔹 STATUS CHIP
-              Container(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: statusColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Text(
-                  status,
-                  style: GoogleFonts.poppins(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: statusColor,
+              GestureDetector(
+                onTap: (){
+                  Get.to(()=>TaskDetailsScreen(task: task));
+                },
+                child: Container(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: statusColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(30),
                   ),
+                  child: Icon(Icons.edit,size: 24,),
                 ),
               ),
             ],
